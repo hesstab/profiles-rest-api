@@ -15,12 +15,12 @@ class UserProfileManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, name=name)
 
-        user.set_password(password)
-        user .save(using=self._db)
+        user.set_password(password) # using set_password creates a hashed password
+        user.save(using=self._db)
 
         return user
 
-    def create_suuperuser(self, email, name, password):
+    def create_superuser(self, email, name, password):
         """Create and save a new superuser with given details"""
         user = self.create_user(email, name, password)
 
@@ -40,8 +40,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     objects = UserProfileManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = 'email' # since we owant to over-write default username field to email
+    REQUIRED_FIELDS = ['name'] # additional required fields on top of username_field (email address)
 
     def get_full_name(self):
         """Retrieve full name of user"""

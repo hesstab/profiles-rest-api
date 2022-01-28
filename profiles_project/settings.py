@@ -122,4 +122,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# HT - configuring the custom user model we created in models.py
 AUTH_USER_MODEL = 'profiles_api.UserProfile'
